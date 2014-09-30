@@ -8,18 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    @IBOutlet var tableView: UITableView!
+    
+    var posts = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 100//self.posts.count
     }
-
-
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCellWithIdentifier("cell") as UITableViewCell
+        
+        cell.textLabel?.text = "\(indexPath.row)"
+        
+        return cell
+    }
 }
 
